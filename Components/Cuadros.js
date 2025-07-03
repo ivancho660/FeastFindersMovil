@@ -1,22 +1,25 @@
-import { TouchableOpacity, Text, StyleSheet, View } from "react-native";
-import { MaterialIcons } from "@expo/vector-icons"; // O cualquier otra librería de íconos que uses
+import { TouchableOpacity, Text, StyleSheet, View, Image } from "react-native";
+import { MaterialIcons } from "@expo/vector-icons";
 
-export default function Cuadro({ title, onPress, iconName, style }) {
+export default function Cuadro({ title, onPress, iconName, imagen, style }) {
     return (
         <TouchableOpacity style={[styles.button, style]} onPress={onPress}>
             <View style={styles.content}>
-                <MaterialIcons name={iconName} size={32} color="#007bff" />
+                {imagen ? (
+                    <Image source={imagen} style={styles.imagen} />
+                ) : (
+                    <MaterialIcons name={iconName} size={48} color="#007bff" />
+                )}
                 <Text style={styles.text}>{title}</Text>
             </View>
         </TouchableOpacity>
-        
     );
 }
 
 const styles = StyleSheet.create({
     button: {
-        width: 155,         // Cuadrado (ancho fijo)
-        height: 180,        // Cuadrado (alto fijo)
+        width: 155,
+        height: 180,
         backgroundColor: "#fff",
         borderRadius: 12,
         elevation: 3,
@@ -32,11 +35,17 @@ const styles = StyleSheet.create({
         alignItems: "center",
     },
     text: {
-    marginTop: 10,
-    color: "#000",
-    fontWeight: "bold",
-    fontSize: 16, // antes era 14
-    textAlign: "center",
-},
-
+        marginTop: 10,
+        color: "#000",
+        fontWeight: "bold",
+        fontSize: 16,
+        textAlign: "center",
+    },
+    imagen: {
+        width: 80,
+        height: 80,
+        borderRadius: 40,
+        resizeMode: "cover",
+        marginBottom: 8,
+    },
 });

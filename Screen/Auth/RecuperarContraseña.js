@@ -1,47 +1,15 @@
 import { View, Text, TextInput, StyleSheet, Alert, TouchableOpacity } from "react-native";
 import BottonComponent from "../../Components/BottomComponents";
 import { useState } from "react";
-import { loginUser } from "../../Src/Servicios/AuthService"; // Asegúrate de que la ruta sea correcta
 
-export default function LoginScreen({ navigation }) {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [loading, setLoading] = useState(false);
 
-    const handleLogin = async () => {
-        setLoading(true);
-
-        try {
-            const result = await loginUser(email, password);
-            if (result.success) {
-                Alert.alert("Éxito", "¡Bienvenido!", [
-                    {
-                        text: "OK",
-                        onPress: () => {
-                            console.log("Login exitoso, redirigiendo automaticamente...");
-                        },
-                    },
-                ]);
-            } else {
-                Alert.alert(
-                    "Error de login",
-                    result.message || "Ocurrio un error al iniciar sesión"
-                );
-            }
-        } catch (error) {
-            console.error("Error inesperado en el login:", error);
-            Alert.alert(
-                "Error",
-                "Ocurrió un error inesperado al intentar iniciar sesión."
-            );
-        } finally {
-            setLoading(false); //simepre desactiva el indecador de carga
-        }
-    };
+export default function recuperar() {
+      const [email, setEmail] = useState("");
     return (
-
         <View style={styles.container}>
-            <Text style={styles.title}>Iniciar Sesión</Text>
+            <Text style={styles.title}>Recuperar contraseña</Text>
+            <Text style={styles.subtitle}>	
+                Introduce tu correo electrónico para buscar tu cuenta.</Text>
             <TextInput
                 style={styles.input}
                 placeholder="Correo Electronico"
@@ -49,34 +17,21 @@ export default function LoginScreen({ navigation }) {
                 onChangeText={setEmail}
                 keyboardType="email-address"
                 autoCapitalize="none"
-                editable={!loading}
 
             />
-            <TextInput
-                style={styles.input}
-                placeholder="Contraseña"
-                secureTextEntry
-                value={password}
-                onChangeText={setPassword}
-                editable={!loading}
-            />
-            <TouchableOpacity onPress={() => navigation.navigate("RecuperarContraseña")}>
-                <Text style={styles.subtitle}>¿Olvidaste tu contraseña?</Text>
-            </TouchableOpacity>
-
-
 
             <BottonComponent
                 style={{ backgroundColor: "#ff8c42" }}
-                title="Iniciar Sesión"
-                onPress={handleLogin}
+                title="Enviar correo"
+
             />
 
             <BottonComponent
-                title="¿no tienes cuenta? Registrate"
-                onPress={() => navigation.navigate("Registro")}
                 style={{ backgroundColor: "#43A047" }}
+                title="Iniciar Sesión"
+
             />
+
         </View>
     );
 }
