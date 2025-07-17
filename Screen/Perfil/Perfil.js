@@ -6,7 +6,7 @@ import api from "../../Src/Servicios/Conexion"
 import {LogoutUser} from "../../Src/Servicios/AuthService";
 
 export default function Perfil ( navigation){
-    const [usuario, setUsuario] = useState(null);
+    const [usuarios, setUsuario] = useState(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() =>{
@@ -89,7 +89,7 @@ export default function Perfil ( navigation){
         );
     }
 
-    if (!usuario) {
+    if (!usuarios) {
         return (
             <View style={styles.container}>
                 <Text style={styles.title}>perfil de usuario.</Text>
@@ -106,8 +106,8 @@ export default function Perfil ( navigation){
         <View style={styles.container}>
             <Text style={styles.title}>Perfil de Usuario</Text>
             <View style={styles.ContainerPerfil}>
-                <Text style={styles.profileText}>Nombre:{usuario.user.nombre || "No disponible"}</Text>
-                <Text style={styles.profileText}>Email:{usuario.user.email || "No disponible"}</Text>
+                <Text style={styles.profileText}>Nombre: {usuarios.user?.nombre || "No disponible"}</Text>
+<Text style={styles.profileText}>Email: {usuarios.user?.email || "No disponible"}</Text>
 
                 <BottonComponent title="Editar perfil" onPress={() => {}} />
                 <BottonComponent
